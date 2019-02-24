@@ -1,5 +1,36 @@
 <template>
   <Container>
+    <Row class="mytitle"><strong>招聘活动</strong></Row>
+    <Row class="mymenu">
+      <Col span='3'>
+      <div class="grid-cell" style="background:Teal">
+          <i class='iconfont icon-details'></i>
+        </div>
+          <div class="icon_name">招聘</div>
+      </Col>
+      <Col span='3'>
+      <div class="grid-cell" style="background:Purple">
+          <i class='iconfont icon-renkoujishu'></i>
+        </div>
+          <div class="icon_name">双选会</div>
+      </Col>
+      <Col span='3'>
+      <div class="grid-cell" style="background:orange">
+          <i class='iconfont icon-kaohepingjia'></i>
+        </div>
+          <div class="icon_name">宣讲会</div>
+      </Col>
+    </Row>
+    <Row class="mytitle"><strong>实习管理</strong></Row>
+    <Row class="mymenu">
+      <Col span='3' @click='handleto("internshipGroup","顶岗实习管理","./application/internshipGroup.html",)'>
+        <div class="grid-cell" style="background:Brown">
+          <i class='iconfont icon-tianyekaogu'></i>
+        </div>
+          <div class="icon_name">顶岗实习</div>
+      </Col>
+    </Row>
+    <!--
     <Stepper :active-step="0" orientation="vertical" :linear="false" v-if='companys.length>0'>
       <template v-for='company in companys'>
         <Step :key='company.id' @click='Internship(company.id,company.companyName,company.department,company.group)'>
@@ -21,13 +52,14 @@
           点击刷新
        </div>
      </div>
+     </-->
   </Container>
 </template>
 <script>
-import { Card, Icon, Button } from 'muse-ui';
+import { Card, Icon, Button,Avatar } from 'muse-ui';
 import { CardHeader } from 'muse-ui/lib/Card';
 import { Stepper, Step, StepLabel } from 'muse-ui/lib/Stepper';
-import { Container } from 'muse-ui/lib/Grid';
+import { Container , Row , Col} from 'muse-ui/lib/Grid';
 import tool from 'util/tools';
 import service from 'service';
 import { Toast } from 'mint-ui';
@@ -39,7 +71,10 @@ export default {
   },
   components: {
     Container,
+    Row,
+    Col,
     Card,
+    Avatar,
     CardHeader,
     Stepper,
     Step,
@@ -48,6 +83,21 @@ export default {
     Button
   },
   methods: {
+    handleto (name,title,furl) {
+      tool.openWin({
+        name: name,
+        url: '../win.html',
+        title: title,
+        fname: name+'_f',
+        furl: furl,
+        hasLeft: 1,
+        hasRight: 0
+      });
+    },
+
+
+    //暂废=====================================================================
+    /*
     // 列表数据
     async listsData () {
       const response = await service.internshipCompany({});
@@ -63,6 +113,8 @@ export default {
           break;
       }
     },
+
+
     Internship (id, companyName, department, group) {
       tool.openWin({
         name: 'Internship_' + id,
@@ -95,15 +147,41 @@ export default {
     },
     refresh(){
       this.listsData();
-    }
+    }*/
   },
   mounted () {
-    this.listsData();
+    //this.listsData();
   }
 };
 </script>
 <style lang="less">
 @import url("../../../assets/css/base.less");
+.iconfont{
+  color:#FFFFFF;
+  font-size: 30px;
+}
+.icon_name{
+  font-size: 12px;
+}
+.mymenu{
+  padding: 10px;
+}
+.mytitle{
+  line-height: 30px;
+  font-size: 16px;
+  padding-top: 15px;
+}
+.grid-cell {
+  margin: 10px auto;
+  align-items: center;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius:round(8px);
+  justify-content: space-between;
+  color: #333;
+}
+
 .mu-card {
   box-shadow: none;
   background: none;
@@ -139,7 +217,6 @@ export default {
 
 .container {
   text-align: center;
-  padding: 0;
 }
 
 .mu-step-label.completed .mu-step-label-circle, .mu-step-label.active .mu-step-label-circle{
