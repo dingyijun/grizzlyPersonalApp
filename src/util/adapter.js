@@ -168,7 +168,7 @@ adapter.deliveryStatusColor = function (status) {
 };
 
 adapter.releaseLogAdapter = function (data) {
-  const content = data.workContent.replace(/\n|\r\n/g, '');
+  const content = data.reward.replace(/\n|\r\n/g, '');
 
   return {
     // head: moment(data.internshipStart).format('YYYY年MM月DD日') + ' 至 ' + moment(data.internshipEnd).format('YYYY年MM月DD日'),
